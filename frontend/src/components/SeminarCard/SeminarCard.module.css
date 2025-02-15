@@ -1,0 +1,52 @@
+.seminarCard {
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  width: 30%;
+  min-width: 320px;
+  max-width: 480px;
+  height: 480px;
+}
+
+.seminarCard__buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.seminarCard__buttonsContainer__deleteButton__deleteIcon,
+.seminarCard__buttonsContainer__editButton__editIcon {
+  width: 100%;
+  height: 100%;
+  /* убирает расплытие иконки при анимации */
+  will-change: transform;
+}
+.seminarCard__buttonsContainer__deleteButton,
+.seminarCard__buttonsContainer__editButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s;
+}
+.seminarCard__buttonsContainer__deleteButton:hover,
+.seminarCard__buttonsContainer__editButton:hover {
+  transform: scale(1.2);
+}
+.seminarCard__photoContainer {
+  width: 100%;
+  height: 260px;
+}
+.seminarCard__photoContainer__photo {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.seminarCard__title {
+}
+
+.seminarCard__description {
+}
+
+.seminarCard__time {
+}

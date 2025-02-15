@@ -1,4 +1,6 @@
 import styles from "./SeminarCard.module.css";
+import deleteIcon from "./delete-icon.svg";
+import editIcon from "./edit-icon.svg";
 
 export default function SeminarCard({
   sCardImg,
@@ -8,12 +10,41 @@ export default function SeminarCard({
   sCardTime,
 }) {
   return (
-    <article>
-      <img src={sCardImg} alt={sCardDescription}></img>
+    <article className={styles.seminarCard}>
+      <div className={styles.seminarCard__buttonsContainer}>
+        <button className={styles.seminarCard__buttonsContainer__editButton}>
+          <img
+            className={
+              styles.seminarCard__buttonsContainer__editButton__editIcon
+            }
+            src={editIcon}
+          ></img>
+        </button>
+        <button className={styles.seminarCard__buttonsContainer__deleteButton}>
+          <img
+            className={
+              styles.seminarCard__buttonsContainer__deleteButton__deleteIcon
+            }
+            src={deleteIcon}
+          ></img>
+        </button>
+      </div>
+      <div className={styles.seminarCard__photoContainer}>
+        <img
+          className={styles.seminarCard__photoContainer__photo}
+          src={sCardImg}
+          alt={sCardDescription}
+        ></img>
+      </div>
       <div>
-        <h2>{sCardHeader}</h2>
-        <p>{sCardDescription}</p>
-        <time dateTime={sCardDate + "T" + sCardTime}></time>
+        <h2 className={styles.seminarCard__title}>{sCardHeader}</h2>
+        <p className={styles.seminarCard__description}>{sCardDescription}</p>
+        <time
+          className={styles.seminarCard__time}
+          dateTime={sCardDate + "T" + sCardTime}
+        >
+          {sCardDate} {sCardTime}
+        </time>
       </div>
     </article>
   );
