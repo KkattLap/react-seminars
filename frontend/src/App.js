@@ -3,10 +3,13 @@ import SeminarCard from "./components/SeminarCard/SeminarCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import seminarDefaultPhoto from "./images/seminar.jpg";
+import useModal from "./components/SeminarCard/useModal";
+import ModalDelete from "./components/SeminarCard/ModalDelete/ModalDelete";
 
 function App() {
   const [seminars, setSeminars] = useState([]);
   const [error, setError] = useState("");
+  const [isShowingModalDelete, toggleModalDelete] = useModal();
 
   useEffect(() => {
     axios
@@ -26,9 +29,18 @@ function App() {
         return false;
       });
   }
-
+  function editCard(cardId) {
+    console.log("edit ", cardId);
+  }
+  // function deleteCard(cardId) {
+  //   console.log("delete ", cardId);
+  // }
   return (
     <div className="App">
+      <ModalDelete
+        show={isShowingModalDelete}
+        onCloseButtonClick={toggleModalDelete}
+      />
       {error ? (
         <p>{error}</p>
       ) : (
@@ -45,6 +57,8 @@ function App() {
               sCardDescription={seminar.description}
               sCardDate={seminar.date}
               sCardTime={seminar.time}
+              editCard={() => editCard(seminar.id)}
+              deleteCard={toggleModalDelete}
             ></SeminarCard>
           );
         })
