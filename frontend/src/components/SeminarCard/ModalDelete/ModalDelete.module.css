@@ -1,0 +1,87 @@
+.modalDeleteWrapper {
+  margin: 0;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(97, 103, 117, 0.5);
+  z-index: 9;
+}
+
+.modalDeleteWrapper__modal {
+  position: relative;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 24px;
+  min-width: 320px;
+  width: 50%;
+}
+
+.modalDeleteWrapper__modal__buttons__cancelButton,
+.modalDeleteWrapper__modal__buttons__deleteButton,
+.modalDeleteWrapper__modal__closeButton {
+  background: none;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.modalDeleteWrapper__modal__buttons__cancelButton,
+.modalDeleteWrapper__modal__buttons__deleteButton {
+  padding: 8px 16px;
+}
+.modalDeleteWrapper__modal__buttons__cancelButton:hover {
+  background-color: rgb(239, 239, 239);
+}
+.modalDeleteWrapper__modal__buttons__deleteButton:hover {
+  background-color: rgb(225, 0, 0);
+}
+.modalDeleteWrapper__modal__buttons__cancelButton:focus {
+  background-color: rgb(230, 230, 230);
+}
+.modalDeleteWrapper__modal__buttons__deleteButton:focus {
+  background-color: rgb(206, 0, 0);
+}
+.modalDeleteWrapper__modal__closeButton {
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  transition: transform 0.3s;
+  transform-origin: center;
+}
+.modalDeleteWrapper__modal__closeButton:hover {
+  transform: scale(1.2);
+}
+
+.modalDeleteWrapper__modal__closeButton__closeIcon {
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+.modalDeleteWrapper__modal__buttons {
+  display: flex;
+  justify-content: space-between;
+}
+.modalDeleteWrapper__modal__buttons__cancelButton {
+  border: 1px solid rgb(207, 215, 220);
+}
+
+.modalDeleteWrapper__modal__buttons__deleteButton {
+  background-color: red;
+  border: 1px solid rgb(189, 1, 1);
+  color: white;
+}
+
+.modalDeleteWrapper__modal__question {
+  margin-top: 42px;
+  margin-bottom: 28px;
+}
