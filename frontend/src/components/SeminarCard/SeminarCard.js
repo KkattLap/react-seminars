@@ -1,6 +1,6 @@
 import styles from "./SeminarCard.module.css";
-import deleteIcon from "./delete-icon.svg";
-import editIcon from "./edit-icon.svg";
+import deleteIcon from "./images/delete-icon.svg";
+import editIcon from "./images/edit-icon.svg";
 
 export default function SeminarCard({
   sCardImg,
@@ -23,6 +23,7 @@ export default function SeminarCard({
               styles.seminarCard__buttonsContainer__editButton__editIcon
             }
             src={editIcon}
+            alt="edit"
           ></img>
         </button>
         <button
@@ -34,6 +35,7 @@ export default function SeminarCard({
               styles.seminarCard__buttonsContainer__deleteButton__deleteIcon
             }
             src={deleteIcon}
+            alt="delete"
           ></img>
         </button>
       </div>
