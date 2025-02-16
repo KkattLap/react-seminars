@@ -46,11 +46,13 @@ export default function SeminarCard({
           alt={sCardDescription}
         ></img>
       </div>
-      <div>
-        <h2 className={styles.seminarCard__title}>{sCardHeader}</h2>
-        <p className={styles.seminarCard__description}>{sCardDescription}</p>
+      <div className={styles.seminarCard__cardInfo}>
+        <h2 className={styles.seminarCard__cardInfo__title}>{sCardHeader}</h2>
+        <p className={styles.seminarCard__cardInfo__description}>
+          {sCardDescription}
+        </p>
         <time
-          className={styles.seminarCard__time}
+          className={styles.seminarCard__cardInfo__time}
           dateTime={sCardDate + "T" + sCardTime}
         >
           {sCardDate} {sCardTime}
