@@ -1,7 +1,11 @@
 import styles from "./ModalDelete.module.css";
 import closeIcon from "./close-icon.svg";
 
-export default function ModalDelete({ show, onCloseButtonClick }) {
+export default function ModalDelete({
+  show,
+  onCloseButtonClick,
+  deleteSeminar,
+}) {
   // Не показывать окно
   if (!show) {
     return null;
@@ -26,11 +30,16 @@ export default function ModalDelete({ show, onCloseButtonClick }) {
         <div className={styles.modalDeleteWrapper__modal__buttons}>
           <button
             className={styles.modalDeleteWrapper__modal__buttons__cancelButton}
+            onClick={onCloseButtonClick}
           >
             Отмена
           </button>
           <button
             className={styles.modalDeleteWrapper__modal__buttons__deleteButton}
+            onClick={() => {
+              deleteSeminar();
+              onCloseButtonClick();
+            }}
           >
             Удалить
           </button>

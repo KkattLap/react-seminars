@@ -8,11 +8,16 @@ export default function SeminarCard({
   sCardDescription,
   sCardDate,
   sCardTime,
+  editCard,
+  deleteCard,
 }) {
   return (
     <article className={styles.seminarCard}>
       <div className={styles.seminarCard__buttonsContainer}>
-        <button className={styles.seminarCard__buttonsContainer__editButton}>
+        <button
+          className={styles.seminarCard__buttonsContainer__editButton}
+          onClick={editCard}
+        >
           <img
             className={
               styles.seminarCard__buttonsContainer__editButton__editIcon
@@ -20,7 +25,10 @@ export default function SeminarCard({
             src={editIcon}
           ></img>
         </button>
-        <button className={styles.seminarCard__buttonsContainer__deleteButton}>
+        <button
+          className={styles.seminarCard__buttonsContainer__deleteButton}
+          onClick={deleteCard}
+        >
           <img
             className={
               styles.seminarCard__buttonsContainer__deleteButton__deleteIcon

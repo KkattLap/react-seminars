@@ -10,6 +10,7 @@ function App() {
   const [seminars, setSeminars] = useState([]);
   const [error, setError] = useState("");
   const [isShowingModalDelete, toggleModalDelete] = useModal();
+  const [seminarDeleteId, setSeminarDeleteId] = useState(null);
 
   useEffect(() => {
     axios
@@ -28,18 +29,37 @@ function App() {
       .catch((err) => {
         return false;
       });
+    // Изменить массив seminars, удалить соотв. элемент
   }
   function editCard(cardId) {
     console.log("edit ", cardId);
   }
-  // function deleteCard(cardId) {
-  //   console.log("delete ", cardId);
-  // }
+
+  function deleteCard(cardId) {
+    console.log(cardId);
+    setSeminarDeleteId(cardId);
+  }
+
+  function deleteSeminar() {
+    axios
+      .delete(`http://localhost:3001/seminars/${seminarDeleteId}`)
+      .then((response) => {
+        console.log(`Deleted seminar with ID ${seminarDeleteId}`);
+        // Удалить seminar с соотв. id из seminars
+        setSeminars(
+          seminars.filter((seminar) => seminar.id !== seminarDeleteId)
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
   return (
     <div className="App">
       <ModalDelete
         show={isShowingModalDelete}
         onCloseButtonClick={toggleModalDelete}
+        deleteSeminar={deleteSeminar}
       />
       {error ? (
         <p>{error}</p>
@@ -58,7 +78,10 @@ function App() {
               sCardDate={seminar.date}
               sCardTime={seminar.time}
               editCard={() => editCard(seminar.id)}
-              deleteCard={toggleModalDelete}
+              deleteCard={() => {
+                deleteCard(seminar.id);
+                toggleModalDelete();
+              }}
             ></SeminarCard>
           );
         })
