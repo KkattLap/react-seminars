@@ -1,5 +1,5 @@
 import styles from "./ModalDelete.module.css";
-import closeIcon from "./close-icon.svg";
+import closeIcon from "../images/close-icon.svg";
 
 export default function ModalDelete({
   show,
