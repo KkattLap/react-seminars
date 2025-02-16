@@ -61,10 +61,26 @@ function App() {
       });
   }
   function editSeminar() {
+    // Получаем текущую дату и время
+    const now = new Date();
+
+    // Получаем дату в нужном формате
+    const day = String(now.getDate()).padStart(2, "0");
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const year = now.getFullYear();
+    const formattedDate = `${day}.${month}.${year}`; // финальная дата в формате дд.мм.гггг
+
+    // Получаем время в нужном формате
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const formattedTime = `${hours}:${minutes}`; // финальное время в формате чч:мм
+
     const newData = {
       photo: photoUserInput,
       title: titleUserInput,
       description: descriptionUserInput,
+      date: formattedDate,
+      time: formattedTime,
     };
     setSeminars((prevSeminars) =>
       prevSeminars.map((seminar) =>
@@ -94,30 +110,32 @@ function App() {
       {error ? (
         <p>{error}</p>
       ) : (
-        seminars.map((seminar) => {
-          return (
-            <SeminarCard
-              key={seminar.id}
-              sCardImg={
-                checkPhotoURL(seminar.photo)
-                  ? seminar.photo
-                  : seminarDefaultPhoto
-              }
-              sCardHeader={seminar.title}
-              sCardDescription={seminar.description}
-              sCardDate={seminar.date}
-              sCardTime={seminar.time}
-              editCard={() => {
-                editCard(seminar.id);
-                toggleModalEdit();
-              }}
-              deleteCard={() => {
-                deleteCard(seminar.id);
-                toggleModalDelete();
-              }}
-            ></SeminarCard>
-          );
-        })
+        <div className="App__seminars">
+          {seminars.map((seminar) => {
+            return (
+              <SeminarCard
+                key={seminar.id}
+                sCardImg={
+                  checkPhotoURL(seminar.photo)
+                    ? seminar.photo
+                    : seminarDefaultPhoto
+                }
+                sCardHeader={seminar.title}
+                sCardDescription={seminar.description}
+                sCardDate={seminar.date}
+                sCardTime={seminar.time}
+                editCard={() => {
+                  editCard(seminar.id);
+                  toggleModalEdit();
+                }}
+                deleteCard={() => {
+                  deleteCard(seminar.id);
+                  toggleModalDelete();
+                }}
+              ></SeminarCard>
+            );
+          })}
+        </div>
       )}
     </div>
   );
