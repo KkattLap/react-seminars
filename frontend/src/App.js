@@ -20,12 +20,28 @@ function App() {
   const [titleUserInput, setTitleUserInput] = useState("");
   const [descriptionUserInput, setDescriptionUserInput] = useState("");
 
+  // Состояние загрузки данных (семинаров)
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/seminars")
-      .then((resp) => setSeminars(resp.data))
-      .catch((err) => setError(err));
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const resp = await axios.get("http://localhost:3001/seminars");
+        setSeminars(resp.data);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  if (loading) {
+    return <div>Загрузка...</div>;
+  }
 
   // Проверка URL для seminar.photo: url рабочий - возврат true, иначе false
   function checkPhotoURL(photoURL) {
@@ -37,7 +53,6 @@ function App() {
       .catch((err) => {
         return false;
       });
-    // Изменить массив seminars, удалить соотв. элемент
   }
 
   function deleteCard(cardId) {
