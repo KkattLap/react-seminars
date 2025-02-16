@@ -5,12 +5,20 @@ import { useEffect, useState } from "react";
 import seminarDefaultPhoto from "./images/seminar.jpg";
 import useModal from "./components/SeminarCard/useModal";
 import ModalDelete from "./components/SeminarCard/ModalDelete/ModalDelete";
+import ModalEdit from "./components/SeminarCard/ModalEdit/ModalEdit";
 
 function App() {
   const [seminars, setSeminars] = useState([]);
   const [error, setError] = useState("");
   const [isShowingModalDelete, toggleModalDelete] = useModal();
+  const [isShowingModalEdit, toggleModalEdit] = useModal();
   const [seminarDeleteId, setSeminarDeleteId] = useState(null);
+  const [seminarEditId, setSeminarEditId] = useState(null);
+
+  // Состояния для полей input в модальном окне (редактирование семинара)
+  const [photoUserInput, setPhotoUserInput] = useState("");
+  const [titleUserInput, setTitleUserInput] = useState("");
+  const [descriptionUserInput, setDescriptionUserInput] = useState("");
 
   useEffect(() => {
     axios
@@ -31,15 +39,13 @@ function App() {
       });
     // Изменить массив seminars, удалить соотв. элемент
   }
-  function editCard(cardId) {
-    console.log("edit ", cardId);
-  }
 
   function deleteCard(cardId) {
-    console.log(cardId);
     setSeminarDeleteId(cardId);
   }
-
+  function editCard(cardId) {
+    setSeminarEditId(cardId);
+  }
   function deleteSeminar() {
     axios
       .delete(`http://localhost:3001/seminars/${seminarDeleteId}`)
@@ -54,12 +60,36 @@ function App() {
         console.error(error);
       });
   }
+  function editSeminar() {
+    const newData = {
+      photo: photoUserInput,
+      title: titleUserInput,
+      description: descriptionUserInput,
+    };
+    setSeminars((prevSeminars) =>
+      prevSeminars.map((seminar) =>
+        seminar.id === seminarEditId ? { ...seminar, ...newData } : seminar
+      )
+    );
+  }
+
   return (
     <div className="App">
       <ModalDelete
         show={isShowingModalDelete}
         onCloseButtonClick={toggleModalDelete}
         deleteSeminar={deleteSeminar}
+      />
+      <ModalEdit
+        show={isShowingModalEdit}
+        onCloseButtonClick={toggleModalEdit}
+        editSeminar={editSeminar}
+        photoUserInput={photoUserInput}
+        titleUserInput={titleUserInput}
+        descriptionUserInput={descriptionUserInput}
+        setPhotoUserInput={setPhotoUserInput}
+        setTitleUserInput={setTitleUserInput}
+        setDescriptionUserInput={setDescriptionUserInput}
       />
       {error ? (
         <p>{error}</p>
@@ -77,7 +107,10 @@ function App() {
               sCardDescription={seminar.description}
               sCardDate={seminar.date}
               sCardTime={seminar.time}
-              editCard={() => editCard(seminar.id)}
+              editCard={() => {
+                editCard(seminar.id);
+                toggleModalEdit();
+              }}
               deleteCard={() => {
                 deleteCard(seminar.id);
                 toggleModalDelete();
