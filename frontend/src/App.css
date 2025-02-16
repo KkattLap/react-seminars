@@ -1,0 +1,8 @@
+.App__seminars {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 32px;
+  justify-items: center;
+  align-items: center;
+  margin: 32px 52px;
+}
