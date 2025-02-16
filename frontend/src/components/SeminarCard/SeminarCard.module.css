@@ -48,12 +48,23 @@
   margin-left: 8px;
   margin-right: 8px;
   height: 132px;
+  /* overflow: hidden; */
+}
+.seminarCard__cardInfo__title,
+.seminarCard__cardInfo__description {
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: initial;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 }
 .seminarCard__cardInfo__title {
   font-size: 18px;
+  -webkit-line-clamp: 2;
 }
-
+.seminarCard__cardInfo__description {
+  -webkit-line-clamp: 3;
+}
 .seminarCard__cardInfo__time {
   position: absolute;
   bottom: 8px;
